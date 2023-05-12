@@ -1,29 +1,21 @@
+const controller = require('./controllers/aluno-controller')
+
 const routes = [
     {
         method: "GET",
+        path: "/",
+        handler: (request, h) => {return {message: "OK"}} 
+    },
+    {
+        method: "GET",
         path: "/alunos",
-        handler: (request, h) => {
-            const alunos = [
-                {
-                    nome: "João",
-                    curso: "ADS"
-                },
-                {
-                    nome: "Maria",
-                    curso: "Gestão Empresarial"
-                },
-                {
-                    nome: "MC Gilsim",
-                    curso: "ADS"
-                }
-            ]
-            return alunos;
-        }
+        handler: controller.find
+    },
+    {
+        method: "POST",
+        path: "/alunos",
+        handler: controller.create
     }
 ];
 
 module.exports = routes;
-
-/*for(let i=0;i<vetor.lenght;i++){
-    console.log(vetor[i]);
-}*/

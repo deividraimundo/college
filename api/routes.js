@@ -1,4 +1,5 @@
 const controller = require('./controllers/aluno-controller')
+const schema = require("./controllers/aluno-schema");
 
 const routes = [
     {
@@ -12,9 +13,30 @@ const routes = [
         handler: controller.find
     },
     {
+        method: "GET",
+        path: "/alunos/{codigo}",
+        handler: controller.findById
+    },
+    {
+        method: "DELETE",
+        path: "/alunos/{codigo}",
+        handler: controller.remove
+    },
+    {
+        method: "PUT",
+        path: "/alunos/{codigo}",
+        options: {
+            handler: controller.update,
+            validate: schema.update
+        }
+    },
+    {
         method: "POST",
         path: "/alunos",
-        handler: controller.create
+        options: {
+            handler: controller.create,
+            validate: schema.postAluno
+        }
     }
 ];
 
